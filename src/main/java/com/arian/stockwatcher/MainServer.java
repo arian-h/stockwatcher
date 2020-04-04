@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @ImportResource("classpath*:application-context.xml")
-public class StockwatcherApplication {
+public class MainServer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StockwatcherApplication.class, args);
+		SpringApplication.run(MainServer.class, args);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
