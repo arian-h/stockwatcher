@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib' version '2.1.0'
 }
 
 group = 'com.arian'
@@ -30,4 +31,20 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+jib {
+	from {
+		image = 'openjdk:alpine'
+	}
+	to {
+		image = '501159261706.dkr.ecr.us-east-2.amazonaws.com/stockwatcher'
+		credHelper = 'ecr-login'
+		tags = ['latest']
+	}
+	container {
+		jvmFlags = ['-Xms512m', '-Xdebug']
+		mainClass = 'com.arian.stockwatcher.MainServer'
+		ports = ['8000']
+	}
 }
